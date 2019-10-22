@@ -15,8 +15,14 @@ namespace Library.Models
         {
             this.Authors = new HashSet<AuthorBooks>();
         }
-        public void AddCopies()
+        public static Copy FindCopy(int ID)
         {
+            return Book.Copies.FirstOrDefault(c => c.CopiesID == ID);
+
+        }
+        public static void AddCopies(int ID)
+        {
+
             this.Copies = new HashSet<Copies>{};
             for(var i = 0; i < this.CopyQuantity; i++)
             {
