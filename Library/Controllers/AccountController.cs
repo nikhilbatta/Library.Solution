@@ -1,12 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
-using ToDoList.Models;
+using Library.Models;
 using System.Threading.Tasks;
-using ToDoList.ViewModels;
+using Library.ViewModels;
 
 namespace Library.Controllers
 {
-    public class AccountController : Controllers 
+    public class AccountController : Controller
     {
         private readonly LibraryContext _db;
         private readonly UserManager<LibraryManager> _userManager;
@@ -22,6 +22,7 @@ namespace Library.Controllers
         {
             return View();
         }
+        [HttpGet]
          public IActionResult Register()
         {
             return View();

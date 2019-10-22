@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System;
+using System.Linq;
 
 namespace Library.Models
 {
@@ -6,18 +8,21 @@ namespace Library.Models
     {
         public int BookID {get;set;}
         public string Title{get;set;}
-        public string ReleaseDate {get;set;}
-        public string Publisher{get;set;}
         public int CopyQuantity{get;set;}
         public virtual ICollection<AuthorBooks> Authors {get;set;}
         public virtual ICollection<Copies> Copies {get;set;}
         public Book()
         {
             this.Authors = new HashSet<AuthorBooks>();
+        }
+        public void AddCopies()
+        {
             this.Copies = new HashSet<Copies>{};
-            for(var i = 0; i < CopyQuantity; i++)
+            for(var i = 0; i < this.CopyQuantity; i++)
             {
-                Copies.Add(new Copies());
+                Console.WriteLine("loophit");
+                this.Copies.Add(new Copies());
+                Console.WriteLine(this.Copies.ElementAt(0));
             }
         }
     }
