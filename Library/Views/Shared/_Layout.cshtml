@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Library</title>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+    <link rel="stylesheet" href="~/css/styles.css">
+    <div class="nav-bar">
+        <p>@Html.ActionLink("Home", "Index", "Home")</p>
+        <p>@Html.ActionLink("See all Books", "Index", "Books")</p>
+        <p>@Html.ActionLink("Add new Book", "Create", "Books")</p>
+        <p>@Html.ActionLink("See all Authors", "Index", "Authors")</p>
+        <p>@Html.ActionLink("Add new Author", "Create", "Authors")</p>
+    </div>
+  </head>
+  <body>
+    <div class="container">
+    @RenderBody()
+    </div>
+  </body>
+</html>
