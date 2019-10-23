@@ -12,7 +12,6 @@ namespace Library.Models
         public virtual ICollection<Copies> Copies {get;set;}
         public Book()
         {
-            
             this.Copies = new HashSet<Copies>{};  
         }
     }

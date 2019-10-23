@@ -1,9 +1,19 @@
 @model Library.Models.Book;
 
+
+<h1>Add a book:</h1>
+
+<h2>Exisiting Authors:</h2>
+
+
 @using (Html.BeginForm())
 {
     @Html.LabelFor(model => model.Title)
     @Html.TextBoxFor(model => model.Title)
+
+    @Html.LabelFor(model => model.Author.AuthorID)
+    @Html.TextBoxFor(model => model.Author.AuthorID)
+
     
     
 

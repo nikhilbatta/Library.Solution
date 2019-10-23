@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Security.Claims;
 using System;
 
-namespace ToDoList.Controllers
+namespace Library.Controllers
 {
   [Authorize] //new line
   public class BooksController : Controller
@@ -24,25 +24,21 @@ namespace ToDoList.Controllers
       _userManager = userManager;
       _db = db;
     }
-
     public ActionResult Index()
     {
-       List<Book> listOfBooks =  _db.Books.Include(c=> c.Author).ToList();
+       List<Book> listOfBooks =  _db.Books.Include(p => p.Author).ToList();
        return View(listOfBooks);
     }
     [HttpGet]
     public ActionResult Create()
     {
+        ViewBag.ListOfAuthors = _db.Authors.ToList();
         return View();
     }
     [HttpPost]
     public ActionResult Create(Book book)
     {
         _db.Books.Add(book);
-        foreach(Copies copy in book.Copies)
-        {
-                 Console.WriteLine(copy);
-        }
         _db.SaveChanges();
         return RedirectToAction("Index");
     }
@@ -56,13 +52,11 @@ namespace ToDoList.Controllers
     public ActionResult AddCopies(int numberofcopies, int BookID)
     {
       Book foundBook = _db.Books.FirstOrDefault(b => b.BookID == BookID);
-      Console.WriteLine(BookID);
-      Console.WriteLine(foundBook.Title);
       for(var i = 0; i < numberofcopies; i++)
             {
-                Console.WriteLine("loophit");
+                
                 foundBook.Copies.Add(new Copies());
-                Console.WriteLine(foundBook.Copies.ElementAt(0));
+                
             }
       _db.SaveChanges();
       return RedirectToAction("Index");
@@ -70,7 +64,7 @@ namespace ToDoList.Controllers
     [HttpGet]
     public ActionResult Details(int id)
     {
-      Book foundBook = _db.Books.FirstOrDefault(b => b.BookID == id);
+      Book foundBook = _db.Books.Include(c => c.Author).Include(c => c.Copies).FirstOrDefault(b => b.BookID == id);
       return View(foundBook);
     }
   }

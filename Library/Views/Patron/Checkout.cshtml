@@ -1,0 +1,10 @@
+@model Library.Models.Copies;
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.CopiesID);
+    @Html.HiddenFor(model => model.Book);
+    @Html.LabelFor(model => model.Patron);
+    @Html.DropDownList("PatronID");
+    <input type="submit" value="Add new item" class="btn btn-default" />
+} 

@@ -1,2 +1,21 @@
 @using Library.Models;
 
+<h2>Book deets:</h2>
+
+<p>Title: @Model.Title</p>
+<p>Author: @Model.Author.FirstName @Model.Author.LastName</p>
+<p>Copies Available:</p>
+@if(@Model.Copies.Count == 0)
+{
+    <p>No copies exist</p>
+}
+@foreach(Copies copy in @Model.Copies)
+{
+    @if(copy.isCheckedOut == false)
+    {
+        <p>Copy #: @copy.CopiesID</p>
+        @Html.ActionLink("Go to Checkout", "Checkout", "Patron", new {bookid = Model.BookID, copyid = copy.CopiesID})
+    }    
+}
+
+@Html.ActionLink("Add Copies of this Book", "AddCopies", "Books", new {id = Model.BookID})

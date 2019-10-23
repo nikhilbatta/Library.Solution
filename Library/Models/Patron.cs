@@ -5,8 +5,8 @@ namespace Library.Models
     public class Patron
     {
         public int PatronID {get;set;}
-        public string FirstName;
-        public string LastName;
+        public string FirstName {get;set;}
+        public string LastName {get;set;}
         public ICollection<Checkout> Copies{get;set;}
         public Patron()
         {

@@ -1,0 +1,13 @@
+@model Library.Models.Patron;
+
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model => model.FirstName)
+    @Html.TextBoxFor(model => model.FirstName)
+
+    @Html.LabelFor(model => model.LastName)
+    @Html.TextBoxFor(model => model.LastName)
+
+    <input type="submit" value="Add new item" class="btn btn-default" />
+}
