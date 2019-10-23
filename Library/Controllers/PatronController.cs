@@ -46,6 +46,8 @@ namespace Library.Controllers
             Copies foundCopy = _db.Copies.Include(c => c.Book).FirstOrDefault(c => c.CopiesID == copyid && c.Book.BookID == bookid);
            
             Console.WriteLine(foundCopy.CopiesID);
+            foundCopy.isCheckedOut = true;
+            _db.SaveChanges();
             ViewBag.CopyID = copyid;
             return View();
             
