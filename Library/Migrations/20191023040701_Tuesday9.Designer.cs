@@ -3,14 +3,16 @@ using System;
 using Library.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Library.Migrations
 {
     [DbContext(typeof(LibraryContext))]
-    partial class LibraryContextModelSnapshot : ModelSnapshot
+    [Migration("20191023040701_Tuesday9")]
+    partial class Tuesday9
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,13 +56,9 @@ namespace Library.Migrations
                     b.Property<int>("BookID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("AuthorID");
-
                     b.Property<string>("Title");
 
                     b.HasKey("BookID");
-
-                    b.HasIndex("AuthorID");
 
                     b.ToTable("Books");
                 });
@@ -282,16 +280,9 @@ namespace Library.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Library.Models.Book", "Book")
-                        .WithMany()
+                        .WithMany("Authors")
                         .HasForeignKey("BookID")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Library.Models.Book", b =>
-                {
-                    b.HasOne("Library.Models.Author", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorID");
                 });
 
             modelBuilder.Entity("Library.Models.Checkout", b =>

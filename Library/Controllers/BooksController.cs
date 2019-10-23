@@ -27,7 +27,7 @@ namespace ToDoList.Controllers
 
     public ActionResult Index()
     {
-       List<Book> listOfBooks =  _db.Books.Include(c=> c.Copies).ToList();
+       List<Book> listOfBooks =  _db.Books.Include(c=> c.Author).ToList();
        return View(listOfBooks);
     }
     [HttpGet]
@@ -45,6 +45,33 @@ namespace ToDoList.Controllers
         }
         _db.SaveChanges();
         return RedirectToAction("Index");
+    }
+    [HttpGet]
+    public ActionResult AddCopies(int id)
+    {
+      Book foundBook = _db.Books.FirstOrDefault(b => b.BookID == id);
+      return View(foundBook);
+    }
+    [HttpPost]
+    public ActionResult AddCopies(int numberofcopies, int BookID)
+    {
+      Book foundBook = _db.Books.FirstOrDefault(b => b.BookID == BookID);
+      Console.WriteLine(BookID);
+      Console.WriteLine(foundBook.Title);
+      for(var i = 0; i < numberofcopies; i++)
+            {
+                Console.WriteLine("loophit");
+                foundBook.Copies.Add(new Copies());
+                Console.WriteLine(foundBook.Copies.ElementAt(0));
+            }
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+    [HttpGet]
+    public ActionResult Details(int id)
+    {
+      Book foundBook = _db.Books.FirstOrDefault(b => b.BookID == id);
+      return View(foundBook);
     }
   }
 }

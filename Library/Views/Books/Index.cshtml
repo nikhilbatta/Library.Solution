@@ -6,10 +6,10 @@
 }
 @foreach(Book book in @Model)
 {
-    <p>@book.BookID</p>
-    @foreach(Copies copy in book.Copies)
-    {
-        <p>@copy.CopiesID</p>
-        <p>@copy.BookID</p>
-    }
+    <p>@book.Title</p>
+    <p>@book.Author.FirstName</p>
+    <p>@book.Author.LastName</p>
+    @Html.ActionLink("Details", "Details", "Books", new {id = @book.BookID})
+    @Html.ActionLink("Add Copies", "AddCopies", "Books", new {id = @book.BookID})
 }
+@Html.ActionLink("Add a new book", "Create", "Books")

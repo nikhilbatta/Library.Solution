@@ -1,0 +1,15 @@
+@model Library.Models.Book;
+
+
+@using (Html.BeginForm())
+{
+    <h3> @Model.Title </h3>
+    <label for = "numberofcopies"> Add copies for this book </label> 
+    
+   <input type="text" name="numberofcopies">
+   <input type="hidden" id="BookID" name="BookID" value="@Model.BookID">
+    
+    
+
+    <input type="submit" value="Add copies" class="btn btn-default" />
+}
