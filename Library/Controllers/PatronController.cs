@@ -42,15 +42,19 @@ namespace Library.Controllers
             Console.WriteLine(bookid);
             Console.WriteLine(copyid);
             ViewBag.PatronID = new SelectList(_db.Patrons, "PatronID", "FirstName");
-            Copies foundCopy = _db.Copies.FirstOrDefault(c => c.CopiesID == copyid && c.Book.BookID == bookid);
             
-            return View(foundCopy);
+            Copies foundCopy = _db.Copies.Include(c => c.Book).FirstOrDefault(c => c.CopiesID == copyid && c.Book.BookID == bookid);
+           
+            Console.WriteLine(foundCopy.CopiesID);
+            ViewBag.CopyID = copyid;
+            return View();
             
         }
         [HttpPost]
-        public ActionResult Checkout(Copies foundCopy)
-        {
-            Console.WriteLine(foundCopy.Patron.PatronID);
+        public ActionResult Checkout(Checkout checkout)
+        { 
+
+            _db.Checkouts.Add(checkout);
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
